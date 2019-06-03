@@ -1,14 +1,31 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title >
+      Sport Review
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+      <div>
+   <div style="display: inline-block;" >
+    Sports :
+   </div>
+    <div style=" float: right; width: 50%;text-align: right; ">
+      GPS
+    <div [style.background-color]="currentColorBar" class="firstbar" style="display: inline-block; " id="firstBarHome"></div>
+    <div  [style.background-color]="currentColorBar" class="secondbar" style="display: inline-block" id="secondBarHome"></div>
+    <div  [style.background-color]="currentColorBar" class="thirdbar" style="display: inline-block" id="thirdBarHome"></div>
+    </div>
+      </div>
+    <div>
+            <ion-button ion-item *ngFor="let act of allSport" style="width: 100px; height: 50px">
+                {{act}}
+            </ion-button>
+    </div>
   </div>
 </ion-content>
