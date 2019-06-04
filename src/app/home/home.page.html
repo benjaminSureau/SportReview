@@ -1,12 +1,12 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title >
-      Sport Review
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title >
+            Sport Review
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -22,10 +22,55 @@
     <div  [style.background-color]="currentColorBar" class="thirdbar" style="display: inline-block" id="thirdBarHome"></div>
     </div>
       </div>
+
     <div>
-            <ion-button ion-item *ngFor="let act of allSport" style="width: 100px; height: 50px">
+        <div class="ion-text-center" style="width: 100%;">
+
+        <ion-button ion-item *ngFor="let act of allSport" style="width: 100px; height: 50px">
                 {{act}}
             </ion-button>
+        </div>
     </div>
+      <div class="separator"> </div>
+      <div>
+          Start Training :
+          <div>
+              <div class="ion-text-center" style="width: 100%;">
+
+              <ion-button ion-item *ngFor="let act of allTraining" style="width: 100px; height: 50px">
+              {{act}}
+          </ion-button>
+              </div>
+          </div>
+      </div>
+      <div class="separator"> </div>
+      <div>
+          <ion-button color="danger" expand="block" (click)="onClickQuickLaunch()"> Quick Launch </ion-button>
+      </div>
+      <div class="separator"></div>
+      <div>
+          <ion-grid class="ion-align-items-center">
+              <ion-row >
+
+                      <table id="myTable" style="margin: 0 auto; border: black; " width="100%" border="1">
+                          <thead>
+                          <tr align="center" >
+                              <th style="border-bottom-color: transparent;" height="30" >{{totalDistance}}</th>
+                              <th style="border-bottom-color: transparent">{{totalAverageSpeed}}</th>
+                              <th style="border-bottom-color: transparent">{{totalTime}}</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr align="center">
+                              <td height="10">Total distance (Km)</td>
+                              <td>Average Speed (Km/h)</td>
+                              <td >Total Time (M)</td>
+                          </tr>
+                          </tbody>
+                      </table>
+              </ion-row>
+          </ion-grid>
+
+      </div>
   </div>
 </ion-content>

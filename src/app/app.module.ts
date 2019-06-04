@@ -9,6 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -21,3 +23,10 @@ import { AppRoutingModule } from './app-routing.module';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+
+export enum currentSignalGPS {
+  low = 1,
+  medium =  2,
+  high = 3
+}

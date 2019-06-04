@@ -9,18 +9,22 @@
 .firstbar {
   width:2px;
   height:8px;
-  margin-right: 2%;
+  margin-right: 2px;
 }
 
 .secondbar {
   width:2px;
   height:12px;
-  margin-right: 2%;
+  margin-right: 2px;
 }
 
 .thirdbar {
   width:2px;
   height:16px;
+  margin-right: 2px;
+
 }
 
-
+.separator {
+  height: 2px; background-color: #1e2023; margin-top: 10px; margin-bottom: 10px;
+}
