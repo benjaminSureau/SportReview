@@ -15,12 +15,12 @@ export class MenuPage implements OnInit {
     },
     {
       title: 'Activities',
-      url: '/menu/ionic',
+      url: '/menu/historic-activity',
       icon: 'list'
     },
     {
       title: 'Training',
-      url: '/menu/flutter',
+      url: '/menu/training',
       icon: 'bicycle'
     }
   ];

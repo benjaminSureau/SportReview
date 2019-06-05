@@ -4,6 +4,7 @@ import leaflet from 'leaflet';
 import { Map, latLng, tileLayer, Layer, marker } from 'leaflet';
 import { Chart } from 'chart.js';
 import {withLatestFrom} from 'rxjs/operators';
+import {NavController, AlertController} from '@ionic/angular';
 
 
 
@@ -38,16 +39,20 @@ export class ActivityPage implements OnInit {
   private colorButtonMap = 'medium';
   private colorButtonElevation = 'primary';
   private colorButtonSegment = 'primary';
+  private colorButtonPause = 'warning';
+  private textButtonPause = 'Pause';
   private markerGroup;
   private myIcon;
   private marker = null;
+
+  private statusTimer = true;
 
   lineChart: Chart;
   @ViewChild('lineCanvas') lineCanvas;
 
 
 
-  constructor() {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
     this.setCurrentSession('test');
     this.changeGPSSignal(currentSignalGPS.medium);
     this.setupChronometer();
@@ -156,12 +161,21 @@ export class ActivityPage implements OnInit {
   // OnClick button
 
   onClickEnd() {
-    // a faire
-    this.appendElevation(9);
+    //this.appendElevation(9);
+    this.statusTimer = false;
+    this.navCtrl.navigateRoot('menu');
   }
 
   onClickPause() {
-    // a faire
+    if (this.colorButtonPause === 'success') {
+      this.statusTimer = true;
+      this.colorButtonPause = 'warning';
+      this.textButtonPause = 'Pause';
+    } else {
+      this.statusTimer = false;
+      this.colorButtonPause = 'success';
+      this.textButtonPause = 'Start';
+    }
   }
 
   onClickMap() {
@@ -211,33 +225,38 @@ export class ActivityPage implements OnInit {
   // chronometer to display
   setupChronometer() {
     const timer = setInterval(() => {
-      this.totalSecond += 1;
-     // this.hourTime = Math.floor(this.totalSecond / 3600);
-     // this.minuteTime = Math.floor(this.totalSecond / 60);
-      this.secondTime += 1;
-      if (this.secondTime === 60) {
-        this.secondTime = 0;
-        this.minuteTime += 1;
-      }
-      if (this.minuteTime === 60) {
-        this.minuteTime = 0;
-        this.hourTime += 1;
-      }
-      if (this.hourTime < 10) {
-        this.stringtime = '0' + this.hourTime.toString() + ':';
-      } else {
-        this.stringtime = this.hourTime.toString() + ':';
-      }
-      if (this.minuteTime < 10) {
-        this.stringtime += '0' + this.minuteTime.toString() + ':';
-      } else {
-        this.stringtime += this.minuteTime.toString() + ':';
-      }
-      if (this.secondTime < 10) {
-        this.stringtime += '0' + this.secondTime.toString();
-      } else {
-        this.stringtime += this.secondTime;
+      if (this.statusTimer) {
+        this.totalSecond += 1;
+        // this.hourTime = Math.floor(this.totalSecond / 3600);
+        // this.minuteTime = Math.floor(this.totalSecond / 60);
+        this.secondTime += 1;
+        if (this.secondTime === 60) {
+          this.secondTime = 0;
+          this.minuteTime += 1;
+        }
+        if (this.minuteTime === 60) {
+          this.minuteTime = 0;
+          this.hourTime += 1;
+        }
+        if (this.hourTime < 10) {
+          this.stringtime = '0' + this.hourTime.toString() + ':';
+        } else {
+          this.stringtime = this.hourTime.toString() + ':';
+        }
+        if (this.minuteTime < 10) {
+          this.stringtime += '0' + this.minuteTime.toString() + ':';
+        } else {
+          this.stringtime += this.minuteTime.toString() + ':';
+        }
+        if (this.secondTime < 10) {
+          this.stringtime += '0' + this.secondTime.toString();
+        } else {
+          this.stringtime += this.secondTime;
+        }
       }
     }, 1000);
+
   }
+
+
 }

@@ -20,7 +20,17 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: '../home/home.module#HomePageModule'
+      },
+      {
+        path: 'historic-activity',
+        loadChildren: '../historic-activity/historic-activity.module#HistoricActivityPageModule'
+      },
+      {
+        path: 'training',
+        loadChildren: '../training/training.module#TrainingPageModule'
       }
+
+
     ]
   }
 ];
