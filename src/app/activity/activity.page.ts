@@ -5,7 +5,7 @@ import { Map, latLng, tileLayer, Layer, marker } from 'leaflet';
 import { Chart } from 'chart.js';
 import {withLatestFrom} from 'rxjs/operators';
 import {NavController, AlertController} from '@ionic/angular';
-
+import { ActivatedRoute } from "@angular/router";
 
 
 
@@ -47,14 +47,16 @@ export class ActivityPage implements OnInit {
 
   private statusTimer = true;
 
+
   lineChart: Chart;
   @ViewChild('lineCanvas') lineCanvas;
 
 
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
-    this.setCurrentSession('test');
+  constructor(private route: ActivatedRoute, public navCtrl: NavController, private alertCtrl: AlertController) {
+    //this.setCurrentSession('test');
     this.changeGPSSignal(currentSignalGPS.medium);
+
     this.setupChronometer();
     this.markerGroup = leaflet.featureGroup();
     this.myIcon = leaflet.icon({
@@ -64,9 +66,16 @@ export class ActivityPage implements OnInit {
 
   }
 
+
+
   ngOnInit() {
     this.setupElevationGraph();
+    this.route.queryParams.subscribe(params => {
+      this.currentSession = params['selectedSport'];
+    });
   }
+
+
 
   public setupElevationGraph() {
 
@@ -114,13 +123,19 @@ export class ActivityPage implements OnInit {
       case currentSignalGPS.high:
         this.currentColorBar = '#3EFF00';
         break;
-
-
     }
   }
 
   ionViewDidEnter() {
-   this.loadmap();
+    this.statusTimer = true;
+    this.loadmap();
+  }
+
+  ionViewDidLeave() {
+  }
+
+  ionViewWillLeave() {
+    this.stringtime = '00:00:00';
   }
 
   appendElevation(elevation: number) {
@@ -163,7 +178,11 @@ export class ActivityPage implements OnInit {
   onClickEnd() {
     //this.appendElevation(9);
     this.statusTimer = false;
-    this.navCtrl.navigateRoot('menu');
+    this.navCtrl.navigateForward('menu');
+    this.totalSecond = 0;
+    this.secondTime = 0;
+    this.minuteTime = 0;
+    this.hourTime = 0;
   }
 
   onClickPause() {

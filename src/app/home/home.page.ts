@@ -6,6 +6,7 @@ import { NavController } from '@ionic/angular';
 import {test} from '@angular-devkit/core/src/virtual-fs/host';
 import {ActivityPage} from '../activity/activity.page';
 import {currentSignalGPS} from '../app.module';
+import {NavigationExtras} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -58,8 +59,35 @@ export class HomePage {
   }
 
   onClickQuickLaunch() {
-  this.navCtrl.navigateRoot('activity');
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        selectedSport: 'QuickLaunch'
+      }
+    };
 
+    this.navCtrl.navigateRoot('activity', navigationExtras);
   }
+
+  onClickSport(name: string) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        selectedSport: name
+      }
+    };
+
+    this.navCtrl.navigateRoot('activity', navigationExtras);
+  }
+
+  onClickTraining(name: string) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        selectedSport: name
+      }
+    };
+
+    this.navCtrl.navigateRoot('activity', navigationExtras);
+  }
+
+
 }
 

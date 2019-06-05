@@ -92,7 +92,7 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>We use your location for full functionality of certain app features.</string>
     </edit-config>
-    <engine name="android" spec="8.0.0" />
-    <engine name="ios" spec="^5.0.1" />
     <engine name="browser" spec="5.0.4" />
+    <engine name="ios" spec="^5.0.1" />
+    <engine name="android" spec="^8.0.0" />
 </widget>
