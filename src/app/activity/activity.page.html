@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar color="primary">
+  <!--  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>-->
+    <ion-title >
+      Sport Review
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+
+  <div>
+    <div style="display: inline-block;" >
+      Session : {{currentSession}}
+    </div>
+    <div style=" float: right; width: 50%;text-align: right; ">
+      GPS
+      <div [style.background-color]="currentColorBar" class="firstbar" style="display: inline-block; " id="firstBarHome"></div>
+      <div  [style.background-color]="currentColorBar" class="secondbar" style="display: inline-block" id="secondBarHome"></div>
+      <div  [style.background-color]="currentColorBar" class="thirdbar" style="display: inline-block" id="thirdBarHome"></div>
+    </div>
+  </div>
+    <div class="separator"></div>
+
+    <div>
+      <h1 align="center" style="font-size: 300%;">{{stringtime}}</h1>
+    </div>
+
+
+  <div class="separator"></div>
+  <div>
+    <ion-grid class="ion-align-items-center">
+      <ion-row >
+
+        <table id="myTable" style="margin: 0 auto; border: black; " width="100%" border="1">
+          <thead>
+          <tr align="center" >
+            <th style="border-bottom-color: transparent;" height="30" >{{totalDistance}}</th>
+            <th style="border-bottom-color: transparent">{{currentSpeed}}</th>
+            <th style="border-bottom-color: transparent">{{averageSpeed}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr align="center">
+            <td height="10">Total distance (Km)</td>
+            <td>Current Speed (Km/h)</td>
+            <td >Average Speed (Km/h)</td>
+          </tr>
+          </tbody>
+        </table>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+    <div class="separator"></div>
+    <div class="ion-text-center" style="width: 100%;">
+          <ion-button  tab="map" color="{{colorButtonMap}}" (click)="onClickMap()">
+            <ion-icon name="map"></ion-icon>
+            <ion-label>Map</ion-label>
+          </ion-button>
+
+          <ion-button  tab="elevation" (click)="onClickElevation()" color="{{colorButtonElevation}}">
+            <ion-icon name="stats"></ion-icon>
+            <ion-label>Elevation</ion-label>
+          </ion-button>
+
+          <ion-button  tab="segment" (click)="onClickSegment()" color="{{colorButtonSegment}}">
+            <ion-icon name="information-circle"></ion-icon>
+            <ion-label>Segment</ion-label>
+          </ion-button>
+    </div>
+    <div class="separator"></div>
+    <div>
+
+    </div>
+
+    <div [hidden]="statusMap" id="map" style="position: fixed; height: 50%; width: 100%;" ></div>
+    <div [hidden]="statusElevation" id="elevation" style="position: fixed; height: 100%; width: 100%;background-color: #0bb8cc" >
+      <section class="chart-wrapper">
+        <canvas #lineChart></canvas>
+      </section>
+    </div>
+    <div [hidden]="statusSegment" id="segment" style="position: fixed; height: 100%; width: 100%; background-color: #0ec254" >
+
+    </div>
+
+
+  </div>
+
+
+</ion-content>
