@@ -11,7 +11,7 @@
 <ion-content>
   <div>
 
-  <div>
+  <div style="margin-top: 1%">
     <div style="display: inline-block;" >
       Session : {{currentSession}}
     </div>
@@ -77,17 +77,26 @@
     </div>
 
     <div [hidden]="statusMap" id="map" style="position: fixed; height: 50%; width: 100%;" ></div>
-    <div [hidden]="statusElevation" id="elevation" style="position: fixed; height: 100%; width: 100%;background-color: #0bb8cc" >
-      <section class="chart-wrapper">
-        <canvas #lineChart></canvas>
-      </section>
+    <div [hidden]="statusElevation" id="elevation" style="position: fixed; height: 50%; width: 100%;" >
+        <canvas #lineCanvas height="90"></canvas>
     </div>
-    <div [hidden]="statusSegment" id="segment" style="position: fixed; height: 100%; width: 100%; background-color: #0ec254" >
+    <div [hidden]="statusSegment" id="segment" style="position: fixed; height: 50%; width: 100%; background-color: #0ec254" >
 
     </div>
+
 
 
   </div>
 
 
 </ion-content>
+<ion-footer no-border >
+  <div>
+    <ion-button  tab="end" color="warning" style="float: left; margin-left: 2%" (click)="onClickPause()">
+      <ion-label>Pause</ion-label>
+    </ion-button>
+    <ion-button  tab="end" color="danger" style="float: right; margin-right: 2%" (click)="onClickEnd()">
+      <ion-label>End</ion-label>
+    </ion-button>
+  </div>
+</ion-footer>

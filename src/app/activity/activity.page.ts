@@ -8,6 +8,7 @@ import {withLatestFrom} from 'rxjs/operators';
 
 
 
+
 @Component({
   selector: 'app-activity',
   templateUrl: './activity.page.html',
@@ -25,6 +26,9 @@ export class ActivityPage implements OnInit {
   private hourTime = 0;
   private stringtime = '00:00:00';
 
+  private arrayOfElevation = [];
+  private arrayOfValueElevation = [];
+
   private totalDistance = '0';
   private averageSpeed = '0';
   private currentSpeed = '0';
@@ -37,6 +41,9 @@ export class ActivityPage implements OnInit {
   private markerGroup;
   private myIcon;
   private marker = null;
+
+  lineChart: Chart;
+  @ViewChild('lineCanvas') lineCanvas;
 
 
 
@@ -53,7 +60,42 @@ export class ActivityPage implements OnInit {
   }
 
   ngOnInit() {
+    this.setupElevationGraph();
+  }
 
+  public setupElevationGraph() {
+
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+
+      type: 'line',
+      data: {
+        labels: this.arrayOfElevation,
+        datasets: [
+          {
+            label: 'Elevation : ',
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: 'rgba(75,192,192,1)',
+            pointBackgroundColor: '#fff',
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+            pointHoverBorderColor: 'rgba(220,220,220,1)',
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: this.arrayOfValueElevation,
+            spanGaps: false,
+          }
+        ]
+      }
+    });
   }
 
   changeGPSSignal(signal: currentSignalGPS) {
@@ -74,6 +116,12 @@ export class ActivityPage implements OnInit {
 
   ionViewDidEnter() {
    this.loadmap();
+  }
+
+  appendElevation(elevation: number) {
+    this.arrayOfValueElevation.push(elevation);
+    this.arrayOfElevation.push(this.arrayOfValueElevation.length);
+    this.setupElevationGraph();
   }
 
   loadmap() {
@@ -106,6 +154,15 @@ export class ActivityPage implements OnInit {
   }
 
   // OnClick button
+
+  onClickEnd() {
+    // a faire
+    this.appendElevation(9);
+  }
+
+  onClickPause() {
+    // a faire
+  }
 
   onClickMap() {
     this.colorButtonMap = 'medium';
