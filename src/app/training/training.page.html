@@ -13,14 +13,14 @@
   <div>
     <div  style="width: 100%;">
 
-      <ion-button ion-item *ngFor="let act of allTraining" style="width: 200px; height: 80px" (click)="presentActionSheet()">
+      <ion-button ion-item *ngFor="let act of allTraining" style="width: 200px; height: 80px" (click)="presentActionSheet(act)">
         {{act}}
       </ion-button>
     </div>
   </div>
 </ion-content>
 <ion-footer no-border>
-  <ion-button color="primary" style="float: right; margin-right: 2%;" class="buttonNew">
+  <ion-button color="primary" style="float: right; margin-right: 2%;" class="buttonNew" (click)="onClickNew()">
     <ion-icon name="add"></ion-icon>
   </ion-button>
 </ion-footer>
